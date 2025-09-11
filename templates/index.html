@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <h1>Utilisateur</h1>
+    {% if user %}
+        <p>Nom: {{ user.name }}</p>
+        <p>Prénom: {{ user.email }}</p>
+    {% else %}
+        <p>Aucun utilisateur trouvé</p>
+    {% endif %}
+</body>
+</html>
