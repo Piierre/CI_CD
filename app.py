@@ -3,11 +3,11 @@ import mysql.connector
 
 app = Flask(__name__)
 
-# :gear: Configuration MySQL (adapter avec ta DB)
+# Configuration MYSQL
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '',   # <-- mets ton mot de passe MySQL
+    'password': '',  
     'database': 'docker_bdd',
     'port' : 3306
 }
@@ -17,7 +17,7 @@ def index():
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor(dictionary=True)
 
-    # Récupère un utilisateur (assume que tu as une table 'Users')
+    # Récupère un utilisateur
     cursor.execute("SELECT name, email FROM users LIMIT 1")
     user = cursor.fetchone()
 
