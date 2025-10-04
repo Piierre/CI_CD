@@ -1,15 +1,16 @@
 from flask import Flask, render_template
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
-# Configuration MYSQL
+# Configuration MYSQL via variables d'environnement (pratique avec docker-compose)
 db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',  
-    'database': 'docker_bdd',
-    'port' : 3306
+    'host': os.getenv('MYSQL_HOST', 'db'),
+    'user': os.getenv('MYSQL_USER', 'root'),
+    'password': os.getenv('MYSQL_PASSWORD', ''),
+    'database': os.getenv('MYSQL_DATABASE', 'docker_bdd'),
+    'port': int(os.getenv('MYSQL_PORT', 3306)),
 }
 
 @app.route("/")
