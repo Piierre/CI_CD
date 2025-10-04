@@ -14,7 +14,7 @@ services:
       - ./flask-app/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
   web:
-    build: .
+    build: ./flask-app
     ports:
       - "5000:5000"
     environment:
