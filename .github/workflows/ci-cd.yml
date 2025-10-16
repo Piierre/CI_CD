@@ -31,6 +31,3 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
-
-  # deploy job removed: deployment will be manual for now
-
