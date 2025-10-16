@@ -30,5 +30,5 @@ services:
     volumes:
       - ./flask_app:/app
 
-  # --- Spring Boot + MongoDB ---
-  
+volumes:
+  db_data:
