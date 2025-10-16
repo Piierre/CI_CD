@@ -3,9 +3,11 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,12 +24,12 @@ jobs:
       - name: Build and push Flask image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Dockerfile
+          context: ./flask_app            # dossier contenant ton code Flask
+          file: ./flask_app/Dockerfile    # chemin vers le Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image (alternative manuelle)
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest -f flask_app/Dockerfile flask_app
           docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
