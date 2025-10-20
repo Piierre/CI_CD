@@ -24,12 +24,12 @@ jobs:
       - name: Build and push Flask image
         uses: docker/build-push-action@v5
         with:
-          context: ./flask_app            # dossier contenant ton code Flask
-          file: ./flask_app/Dockerfile    # chemin vers le Dockerfile
+          context: ./flask_app            # Flask API
+          file: ./flask_app/Dockerfile    # Flask API Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
-      - name: Build and push Docker image (alternative manuelle)
+      - name: Build and push Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest -f flask_app/Dockerfile flask_app
           docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest

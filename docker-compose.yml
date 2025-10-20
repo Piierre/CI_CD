@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # --- Flask + MySQL ---
+  # MySQL
   db:
     image: mysql:8.0
     restart: always
@@ -14,6 +14,7 @@ services:
       - db_data:/var/lib/mysql
       - ./flask_app/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
+  # Flask
   web:
     build: ./flask_app
     container_name: flask_app
@@ -30,7 +31,28 @@ services:
     volumes:
       - ./flask_app:/app
 
+# MongoDB
+mongo:
+    image: mongo:6
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+# Spring Boot
+spring:
+    build: ./spring_app
+    container_name: spring_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/springdb
+    depends_on:
+      - mongo
+
 volumes:
   db_data:
-
-# --- IGNORE ---
+  mongo_data: 
+  
