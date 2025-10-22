@@ -31,8 +31,8 @@ services:
     volumes:
       - ./flask_app:/app
 
-# MongoDB
-mongo:
+  # MongoDB
+  mongo:
     image: mongo:6
     container_name: mongo_db
     restart: always
@@ -41,19 +41,17 @@ mongo:
     volumes:
       - mongo_data:/data/db
 
-# Spring Boot
-spring:
-  build: ./spring_app
-  container_name: spring_app
-  ports:
-    - "8080:8080"
-  environment:
-    - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/springdb
-  depends_on:
-    - mongo
-
+  # Spring Boot
+  spring:
+    build: ./spring_app
+    container_name: spring_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/springdb
+    depends_on:
+      - mongo
 
 volumes:
   db_data:
-  mongo_data: 
-  
+  mongo_data:
