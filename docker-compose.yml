@@ -43,14 +43,15 @@ mongo:
 
 # Spring Boot
 spring:
-    build: ./spring_app
-    container_name: spring_app
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/springdb
-    depends_on:
-      - mongo
+  build: ./spring_app
+  container_name: spring_app
+  ports:
+    - "8080:8080"
+  environment:
+    - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/springdb
+  depends_on:
+    - mongo
+
 
 volumes:
   db_data:
